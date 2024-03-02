@@ -74,3 +74,74 @@ local char = plr.Character
     end
   end
 end)
+
+ui:Button("Nuke server", function()
+    while true do
+wait(0.1)
+local Players = game:GetService("Players")
+
+local args = {
+    [1] = CFrame.new(),
+    [2] = Vector3.new(),
+    [3] = false
+}
+
+local localPlayer = Players.LocalPlayer
+
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= localPlayer then
+        local character = player.Character
+        if character then
+            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                args[1] = CFrame.new(humanoidRootPart.Position)
+                args[2] = humanoidRootPart.Position
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild("cola v7").SpawnGrenade:FireServer(unpack(args))
+            end
+        end
+    end
+end
+end
+end)
+
+ui:Button("Anti Cola", function()
+    local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local distance = 5  -- Расстояние для отталкивания объектов
+local heartbeatConnection
+
+local function pushObjects()
+    for _, part in ipairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") and part.Anchored == false and part ~= humanoidRootPart then
+            local direction = (part.Position - humanoidRootPart.Position).Unit
+            local force = direction * 100  -- Можно изменить силу отталкивания здесь
+            part.Velocity = force
+        end
+    end
+end
+
+local function onCharacterAdded(newCharacter)
+    character = newCharacter
+    humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    
+    heartbeatConnection = RunService.Heartbeat:Connect(pushObjects)
+end
+
+local function onCharacterRemoved()
+    if heartbeatConnection then
+        heartbeatConnection:Disconnect()
+    end
+end
+
+if character then
+    heartbeatConnection = RunService.Heartbeat:Connect(pushObjects)
+else
+    localPlayer.CharacterAdded:Connect(onCharacterAdded)
+end
+
+localPlayer.CharacterRemoving:Connect(onCharacterRemoved)
+end)
