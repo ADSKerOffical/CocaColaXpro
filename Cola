@@ -111,14 +111,14 @@ local RunService = game:GetService("RunService")
 local localPlayer = Players.LocalPlayer
 local character = localPlayer.Character
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local distance = 5  -- Расстояние для отталкивания объектов
+local distance = 5
 local heartbeatConnection
 
 local function pushObjects()
     for _, part in ipairs(workspace:GetDescendants()) do
         if part:IsA("BasePart") and part.Anchored == false and part ~= humanoidRootPart then
             local direction = (part.Position - humanoidRootPart.Position).Unit
-            local force = direction * 100  -- Можно изменить силу отталкивания здесь
+            local force = direction * 100
             part.Velocity = force
         end
     end
