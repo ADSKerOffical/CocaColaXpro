@@ -37,6 +37,15 @@ game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mraz
 end)
 
 ui:Button("Spam Cola", function()
+
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "cola v7" then
+       v.Parent = LP.Character
+   end
+end
+
 while true do
 wait(0.1)
     local mouse = game:GetService("Players").LocalPlayer:GetMouse()
@@ -53,6 +62,15 @@ end
 end)
 
 ui:Textbox("Make Cola's", function(arg)
+
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "cola v7" then
+       v.Parent = LP.Character
+   end
+end
+
 for i = 1, arg do
 local args = {
     [1] = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position),
@@ -77,6 +95,15 @@ end)
 
 ui:Dropdown("Nuke server", {"Nuke server","Nuke server v2"}, function(arg)
 	if arg == "Nuke server" then
+
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "cola v7" then
+       v.Parent = LP.Character
+   end
+end
+
 	while true do
 wait(0.1)
 local Players = game:GetService("Players")
@@ -105,6 +132,15 @@ end
 end
 end
 	if arg == "Nuke server v2" then
+
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "cola v7" then
+       v.Parent = LP.Character
+   end
+end
+
 		  for i = 1, 10 do
 local Players = game:GetService("Players")
 
