@@ -78,8 +78,8 @@ end)
 ui:Dropdown("Nuke server", {"Nuke server","Nuke server v2"}, function(arg)
 	if arg == "Nuke server" then
 	while true do
-	wait(0.1)
-			game:GetService("Players")
+wait(0.1)
+local Players = game:GetService("Players")
 
 local args = {
     [1] = CFrame.new(),
