@@ -1,6 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lolpoppyus/Roblox-Lua/master/Pop%20UI%20Lib", true))()
 
-local ui = library:Tab("Coca-Cola X pro 1.0")
+local ui = library:Tab("Coca-Cola X pro 1.1")
 
 ui:Button("Get Coca-Cola", function()
     last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
@@ -52,8 +52,8 @@ game:GetService("Players").LocalPlayer.Character:FindFirstChild("cola v7").Spawn
 end
 end)
 
-ui:Button("Mega explosion", function()
-for i = 1, 100 do
+ui:Textbox("Make Cola's", function(arg)
+for i = 1, arg do
 local args = {
     [1] = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position),
     [2] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position),
@@ -75,9 +75,37 @@ local char = plr.Character
   end
 end)
 
-ui:Button("Nuke server", function()
-    while true do
-wait(0.1)
+ui:Dropdown("Nuke server", {"Nuke server","Nuke server v2"}, function(arg)
+	if arg == "Nuke server" then
+	while true do
+	wait(0.1)
+			game:GetService("Players")
+
+local args = {
+    [1] = CFrame.new(),
+    [2] = Vector3.new(),
+    [3] = false
+}
+
+local localPlayer = Players.LocalPlayer
+
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= localPlayer then
+        local character = player.Character
+        if character then
+            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                args[1] = CFrame.new(humanoidRootPart.Position)
+                args[2] = humanoidRootPart.Position
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild("cola v7").SpawnGrenade:FireServer(unpack(args))
+            end
+        end
+    end
+end
+end
+end
+	if arg == "Nuke server v2" then
+		  for i = 1, 10 do
 local Players = game:GetService("Players")
 
 local args = {
@@ -102,6 +130,7 @@ for _, player in pairs(Players:GetPlayers()) do
     end
 end
 end
+  end
 end)
 
 ui:Button("Anti Cola", function()
