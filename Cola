@@ -1,6 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lolpoppyus/Roblox-Lua/master/Pop%20UI%20Lib", true))()
 
-local ui = library:Tab("Coca-Cola X pro 1.1")
+local ui = library:Tab("Coca-Cola X pro 1.2")
 
 ui:Button("Get Coca-Cola", function()
     last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
@@ -79,6 +79,42 @@ local args = {
 }
 
 game:GetService("Players").LocalPlayer.Character:FindFirstChild("cola v7").SpawnGrenade:FireServer(unpack(args))
+end
+end)
+
+ui:Textbox("Explode player", function(arg)
+
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "cola v7" then
+       v.Parent = LP.Character
+   end
+end
+
+    for i = 1, 100 do
+local Players = game:GetService("Players")
+local TargetPlayerName = arg
+
+local args = {
+    [1] = CFrame.new(),
+    [2] = Vector3.new(),
+    [3] = false
+}
+
+for _, player in pairs(Players:GetPlayers()) do
+    if string.find(player.Name, TargetPlayerName) then
+        local character = player.Character
+        if character then
+            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                args[1] = CFrame.new(humanoidRootPart.Position)
+                args[2] = humanoidRootPart.Position
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild("cola v7").SpawnGrenade:FireServer(unpack(args))
+            end
+        end
+    end
+end
 end
 end)
 
