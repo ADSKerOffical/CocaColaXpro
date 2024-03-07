@@ -1,3 +1,5 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
+
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lolpoppyus/Roblox-Lua/master/Pop%20UI%20Lib", true))()
 
 local ui = library:Tab("Coca-Cola X pro 1.2")
@@ -205,44 +207,114 @@ end
   end
 end)
 
-ui:Button("Anti Cola", function()
-    local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+ui:Dropdown("Godmode way", {"Tutorial","Get sword","Get carpet"}, function(arg)
+	if arg == "Tutorial" then
+			setclipboard("https://youtu.be/UagtWacwRkk?si=bnDpz0wQhuJ3YXuy")
+			
+			OrionLib:MakeNotification({
+	Name = "Info",
+	Content = "Copied in clipboard ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    end
+	if arg == "Get sword" then
+		  last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
 
-local localPlayer = Players.LocalPlayer
-local character = localPlayer.Character
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15, 52, -34)
+task.wait()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local distance = 5
-local heartbeatConnection
+local actionRadius = 1.5
 
-local function pushObjects()
-    for _, part in ipairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") and part.Anchored == false and part ~= humanoidRootPart then
-            local direction = (part.Position - humanoidRootPart.Position).Unit
-            local force = direction * 100
-            part.Velocity = force
+game:GetService("CoreGui").PurchasePrompt.Enabled = false
+
+for i, v in pairs(workspace:GetDescendants()) do
+    if v:IsA("ClickDetector") then
+        local objectPosition = v.Parent.Position
+        local playerPosition = humanoidRootPart.Position
+        local distance = (objectPosition - playerPosition).magnitude 
+
+        if distance <= actionRadius then
+            fireclickdetector(v)
         end
     end
 end
-
-local function onCharacterAdded(newCharacter)
-    character = newCharacter
-    humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-    
-    heartbeatConnection = RunService.Heartbeat:Connect(pushObjects)
+task.wait(0.1)
+for i = 1, 15 do
+    wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11, 52, -54)
 end
+task.wait(0.1)
+game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
+    end
+    if arg == "Get carpet" then
+    last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
 
-local function onCharacterRemoved()
-    if heartbeatConnection then
-        heartbeatConnection:Disconnect()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-23, 47, 39)
+task.wait()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local actionRadius = 1.5
+
+game:GetService("CoreGui").PurchasePrompt.Enabled = false
+
+for i, v in pairs(workspace:GetDescendants()) do
+    if v:IsA("ClickDetector") then
+        local objectPosition = v.Parent.Position
+        local playerPosition = humanoidRootPart.Position
+        local distance = (objectPosition - playerPosition).magnitude 
+
+        if distance <= actionRadius then
+            fireclickdetector(v)
+        end
     end
 end
+task.wait(0.1)
+for i = 1, 50 do
+    task.wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-25, 52, 24)
+end
+task.wait(0.1)
+game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
+    end
+end)
 
-if character then
-    heartbeatConnection = RunService.Heartbeat:Connect(pushObjects)
-else
-    localPlayer.CharacterAdded:Connect(onCharacterAdded)
+ui:Textbox("100% kill player (Activate Moto)", function(arg)
+last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+
+        PlayerName = arg
+local function findPlayer(name)
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player.Name:lower():match(name:lower()) or player.DisplayName:lower():match(name:lower()) then
+            return player
+        end
+    end
+    return nil
 end
 
-localPlayer.CharacterRemoving:Connect(onCharacterRemoved)
+local function teleportToPlayer(targetPlayer)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    local targetCharacter = targetPlayer.Character or targetPlayer.CharacterAdded:Wait()
+    local targetHumanoidRootPart = targetCharacter:WaitForChild("HumanoidRootPart")
+
+    humanoidRootPart.CFrame = targetHumanoidRootPart.CFrame
+end
+
+local targetName = PlayerName
+local targetPlayer = findPlayer(targetName)
+
+if targetPlayer then
+    teleportToPlayer(targetPlayer)
+    task.wait(0.1)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+    
+    wait(4.1)
+    
+    game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
+    end
 end)
