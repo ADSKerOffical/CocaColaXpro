@@ -317,3 +317,76 @@ if targetPlayer then
     game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
     end
 end)
+
+tab.newLabel("Milk tool")
+
+tab.newButton("Get Milk tool", "Gives you Milk tool", function()
+last_pick_sin_mrazy = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-17, 49, 3)
+task.wait()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local actionRadius = 1.5
+
+game:GetService("CoreGui").PurchasePrompt.Enabled = false
+
+for i, v in pairs(workspace:GetDescendants()) do
+    if v:IsA("ClickDetector") then
+        local objectPosition = v.Parent.Position
+        local playerPosition = humanoidRootPart.Position
+        local distance = (objectPosition - playerPosition).magnitude 
+
+        if distance <= actionRadius then
+            fireclickdetector(v)
+        end
+    end
+end
+task.wait(0.1)
+for i = 1, 15 do
+    wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15, 52, 23)
+end
+task.wait(0.1)
+game. Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy
+end)
+
+tab.newButton("Spam Milk tool", "Well, you understood it yourself", function()
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "milk tool" then
+       v.Parent = LP.Character
+   end
+end
+
+while true do
+wait(0.1)
+local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local clickPosition = mouse.Hit.Position
+
+local args = {
+    [1] = CFrame.new(clickPosition),
+    [2] = Vector3.new(clickPosition),
+    [3] = false
+}
+
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("milk tool").SpawnGrenade:FireServer(unpack(args))
+end
+end)
+
+tab.newButton("Spam sound", "The activation sound for this tool is spammy", function()
+local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "milk tool" then
+       v.Parent = LP.Character
+   end
+end
+
+while true do
+task.wait()
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("milk tool").specialdelivery:FireServer()
+end
+end)
